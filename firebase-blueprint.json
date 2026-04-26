@@ -1,0 +1,125 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "A product in the catalog.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "The product name." },
+        "category": { "type": "string", "description": "Category of the product (e.g. Moquette Pro, Faux Plafonds)." },
+        "price": { "type": "string", "description": "Indicative price or range." },
+        "stock": { "type": "number", "description": "Stock quantity available." },
+        "status": { "type": "string", "enum": ["Actif", "Inactif", "Rupture"], "description": "Visibility and availability status." },
+        "image": { "type": "string", "description": "Main product image URL." },
+        "description": { "type": "string", "description": "Full markdown product description." },
+        "slug": { "type": "string", "description": "URL friendly unique identifier." },
+        "tags": { "type": "array", "items": { "type": "string" }, "description": "Associated sectors or attributes." },
+        "features": { "type": "array", "items": { "type": "string" }, "description": "Bullet points for product highlights." },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "category", "price", "stock", "status", "image", "description", "slug", "updatedAt"]
+    },
+    "Sector": {
+      "title": "Sector",
+      "description": "An industry sector for specialized solutions.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier (slug)." },
+        "name": { "type": "string", "description": "Sector name." },
+        "description": { "type": "string", "description": "Description of sector-specific expertise." },
+        "imageUrl": { "type": "string", "description": "Sector banner/thumbnail image." },
+        "size": { "type": "string", "enum": ["small", "large"], "description": "Display size in the grid." },
+        "order": { "type": "number", "description": "Display priority." }
+      },
+      "required": ["id", "name", "description", "imageUrl", "size", "order"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "A completed realization/case study.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "sector": { "type": "string", "description": "Reference to a sector ID." },
+        "surface": { "type": "string", "description": "Project surface area (e.g. 2500 m2)." },
+        "imageUrl": { "type": "string" },
+        "isLarge": { "type": "boolean", "description": "Highlight project in the grid." },
+        "completionDate": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["title", "sector", "imageUrl", "isLarge"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Global settings for the website.",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "heroTitle": { "type": "string" },
+        "heroSubtitle": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "primaryColor": { "type": "string" },
+        "secondaryColor": { "type": "string" },
+        "backgroundColor": { "type": "string" },
+        "textColor": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["companyName", "email", "phone", "address", "heroTitle", "heroSubtitle", "updatedAt"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Contact or devis request from a lead.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "message": { "type": "string" },
+        "subject": { "type": "string" },
+        "status": { "type": "string", "enum": ["New", "Read", "Replied"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "phone", "message", "status", "createdAt"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Administrator user record.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "name": { "type": "string" }
+      },
+      "required": ["email", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": { "$ref": "Product" },
+      "description": "Products catalog."
+    },
+    "/sectors/{sectorId}": {
+      "schema": { "$ref": "Sector" },
+      "description": "Industry sectors."
+    },
+    "/projects/{projectId}": {
+      "schema": { "$ref": "Project" },
+      "description": "Completed realizations."
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "Settings" },
+      "description": "Singleton settings document (usually 'global')."
+    },
+    "/messages/{messageId}": {
+      "schema": { "$ref": "Message" },
+      "description": "Contact form submissions."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "Admin" },
+      "description": "Authorized administrators."
+    }
+  }
+}
