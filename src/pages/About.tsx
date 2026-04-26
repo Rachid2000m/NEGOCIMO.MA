@@ -15,11 +15,25 @@ export default function About() {
       </div>
 
       {/* About content */}
-      <div className="container px-4 sm:px-6 lg:px-8 mx-auto mt-16 max-w-4xl text-center">
-        <h2 className="text-2xl md:text-4xl font-bold font-heading text-navy mb-6">Notre Histoire</h2>
-        <p className="text-lg text-text-secondary leading-relaxed mb-12">
-          NEGOCIMO est né d'une vision claire : transformer les espaces professionnels en environnements d'exception. Forte de plus de 10 ans d'expérience, notre équipe accompagne les entreprises, hôtels, hôpitaux et institutions dans le choix et la mise en place de revêtements, faux plafonds et mobiliers adaptés à leurs exigences les plus strictes.
-        </p>
+      <div className="container px-4 sm:px-6 lg:px-8 mx-auto mt-16 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="text-left">
+            <h2 className="text-2xl md:text-4xl font-bold font-heading text-navy mb-6">Notre Histoire</h2>
+            <p className="text-lg text-text-secondary leading-relaxed mb-6">
+              NEGOCIMO est né d'une vision claire : transformer les espaces professionnels en environnements d'exception. Forte de plus de 10 ans d'expérience, notre équipe accompagne les entreprises, hôtels, hôpitaux et institutions dans le choix et la mise en place de revêtements, faux plafonds et mobiliers adaptés à leurs exigences les plus strictes.
+            </p>
+            <p className="text-lg text-text-secondary leading-relaxed">
+              Nous sélectionnons rigoureusement nos partenaires et matériaux pour garantir une durabilité et une esthétique irréprochables, tout en respectant les normes acoustiques et d'hygiène de chaque secteur.
+            </p>
+          </div>
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl h-[400px]">
+             <img 
+               src="https://images.unsplash.com/photo-1549692443-43e93a77f37f?auto=format&fit=crop&q=80&w=800" 
+               alt="NEGOCIMO Team and Workspace" 
+               className="w-full h-full object-cover"
+             />
+          </div>
+        </div>
       </div>
 
       <WhyUsSection />

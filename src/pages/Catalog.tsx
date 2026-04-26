@@ -6,12 +6,12 @@ import { Filter } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 
 export const products = [
-  { id: '1', name: "Moquette Dalle Interface Composure", category: "Moquette Pro", tags: ["Bureaux", "Hôtellerie"], image: "https://images.unsplash.com/photo-1588188185590-bba75ee70d1e?auto=format&fit=crop&q=80&w=600" },
-  { id: '2', name: "Revêtement PVC Tarkett iQ Optima", category: "Revêtements PVC", tags: ["Santé", "Enseignement"], image: "https://images.unsplash.com/photo-1581452367735-866fe0877995?auto=format&fit=crop&q=80&w=600" },
-  { id: '3', name: "Plafond Acoustique Rockfon Blanka", category: "Faux Plafonds", tags: ["Bureaux", "Commerce"], image: "https://images.unsplash.com/photo-1616486022879-1af40ee5f791?auto=format&fit=crop&q=80&w=600" },
-  { id: '4', name: "Sol LVT Click Gerflor Creation", category: "Revêtements PVC", tags: ["Commerce", "Hôtellerie", "Bureaux"], image: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?auto=format&fit=crop&q=80&w=600" },
-  { id: '5', name: "Dalle Moquette Desso Desert", category: "Moquette Pro", tags: ["Bureaux"], image: "https://images.unsplash.com/photo-1558223687-0b1a0300405c?auto=format&fit=crop&q=80&w=600" },
-  { id: '6', name: "Wood Lines Plafon Hunter Douglas", category: "Faux Plafonds", tags: ["Hôtellerie", "Bureaux"], image: "https://images.unsplash.com/photo-1541123437800-1c0c053f5b72?auto=format&fit=crop&q=80&w=600" }
+  { id: '1', name: "Moquette Dalle Interface Composure", category: "Moquette Pro", tags: ["Bureaux", "Hôtellerie"], image: "https://images.unsplash.com/photo-1621293954908-d81149c0dd07?auto=format&fit=crop&q=80&w=600" },
+  { id: '2', name: "Revêtement PVC Tarkett iQ Optima", category: "Revêtements PVC", tags: ["Santé", "Enseignement"], image: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?auto=format&fit=crop&q=80&w=600" },
+  { id: '3', name: "Plafond Acoustique Rockfon Blanka", category: "Faux Plafonds", tags: ["Bureaux", "Commerce"], image: "https://images.unsplash.com/photo-1541123437800-1c0c053f5b72?auto=format&fit=crop&q=80&w=600" },
+  { id: '4', name: "Sol LVT Click Gerflor Creation", category: "Revêtements PVC", tags: ["Commerce", "Hôtellerie", "Bureaux"], image: "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&q=80&w=600" },
+  { id: '5', name: "Dalle Moquette Desso Desert", category: "Moquette Pro", tags: ["Bureaux"], image: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&q=80&w=600" },
+  { id: '6', name: "Wood Lines Plafon Hunter Douglas", category: "Faux Plafonds", tags: ["Hôtellerie", "Bureaux"], image: "https://images.unsplash.com/photo-1449156001499-47399479fb48?auto=format&fit=crop&q=80&w=600" }
 ];
 
 export default function Catalog() {

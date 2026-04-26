@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const projects = [
-  { id: 1, title: 'Siège Social Banque Alpha', sector: 'Bureaux', surface: '2500 m²', img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800', isLarge: true },
-  { id: 2, title: 'Hôtel Le Prestige', sector: 'Hôtellerie', surface: '1200 m²', img: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=800', isLarge: false },
+  { id: 1, title: 'Siège Social Banque Alpha', sector: 'Bureaux', surface: '2500 m²', img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200', isLarge: true },
+  { id: 2, title: 'Hôtel Le Prestige', sector: 'Hôtellerie', surface: '1200 m²', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800', isLarge: false },
   { id: 3, title: 'Clinique Internationale', sector: 'Santé', surface: '4800 m²', img: 'https://images.unsplash.com/photo-1519494026892-d98c25dbce17?auto=format&fit=crop&q=80&w=800', isLarge: false },
-  { id: 4, title: 'Boutique Flagship', sector: 'Commerce', surface: '450 m²', img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800', isLarge: false },
-  { id: 5, title: 'Université des Sciences', sector: 'Enseignement', surface: '8000 m²', img: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800', isLarge: false },
+  { id: 4, title: 'Boutique Flagship', sector: 'Commerce', surface: '450 m²', img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&q=80&w=800', isLarge: false },
+  { id: 5, title: 'Université des Sciences', sector: 'Enseignement', surface: '8000 m²', img: 'https://images.unsplash.com/photo-1541339907198-e087563ef3f5?auto=format&fit=crop&q=80&w=800', isLarge: false },
 ];
 
 export default function RealisationsSection() {

@@ -12,18 +12,23 @@ export default function Settings() {
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (settings?.logoUrl) {
-      setLogoPreview(settings.logoUrl);
-    }
-  }, [settings?.logoUrl]);
-
   const [formColors, setFormColors] = useState({
     primaryColor: settings?.primaryColor || '#1C2B4A',
     secondaryColor: settings?.secondaryColor || '#B5902A',
     backgroundColor: settings?.backgroundColor || '#F9F7F4',
     textColor: settings?.textColor || '#1A1A1A',
   });
+
+  const [heroText, setHeroText] = useState({
+    title: settings?.heroTitle || '',
+    subtitle: settings?.heroSubtitle || '',
+  });
+
+  useEffect(() => {
+    if (settings?.logoUrl) {
+      setLogoPreview(settings.logoUrl);
+    }
+  }, [settings?.logoUrl]);
 
   useEffect(() => {
     if (settings) {
@@ -32,6 +37,10 @@ export default function Settings() {
         secondaryColor: settings.secondaryColor || '#B5902A',
         backgroundColor: settings.backgroundColor || '#F9F7F4',
         textColor: settings.textColor || '#1A1A1A',
+      });
+      setHeroText({
+        title: settings.heroTitle || '',
+        subtitle: settings.heroSubtitle || '',
       });
     }
   }, [settings]);
@@ -61,17 +70,18 @@ export default function Settings() {
     
     try {
       await updateSettings({
-        companyName: formData.get('companyName') as string,
-        email: formData.get('email') as string,
-        phone: formData.get('phone') as string,
-        address: formData.get('address') as string,
-        heroTitle: formData.get('heroTitle') as string,
-        heroSubtitle: formData.get('heroSubtitle') as string,
-        logoUrl: logoPreview || undefined,
-        primaryColor: formData.get('primaryColor') as string || undefined,
-        secondaryColor: formData.get('secondaryColor') as string || undefined,
-        backgroundColor: formData.get('backgroundColor') as string || undefined,
-        textColor: formData.get('textColor') as string || undefined,
+        companyName: (formData.get('companyName') as string) || '',
+        email: (formData.get('email') as string) || '',
+        phone: (formData.get('phone') as string) || '',
+        address: (formData.get('address') as string) || '',
+        heroTitle: heroText.title || '',
+        heroSubtitle: heroText.subtitle || '',
+        logoUrl: logoPreview || '',
+        primaryColor: (formData.get('primaryColor') as string) || '',
+        secondaryColor: (formData.get('secondaryColor') as string) || '',
+        backgroundColor: (formData.get('backgroundColor') as string) || '',
+        textColor: (formData.get('textColor') as string) || '',
+        whatsappNumber: (formData.get('whatsappNumber') as string) || '',
       });
       alert('Paramètres enregistrés avec succès !');
     } catch (err) {
@@ -223,6 +233,10 @@ export default function Settings() {
               <label className="text-sm font-semibold text-navy">Adresse Physique</label>
               <Input name="address" defaultValue={settings.address || ''} />
             </div>
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-navy">Numéro WhatsApp (Format: 212...)</label>
+              <Input name="whatsappNumber" defaultValue={settings.whatsappNumber || ''} placeholder="Ex: 212600000000" />
+            </div>
           </div>
         </div>
 
@@ -231,17 +245,77 @@ export default function Settings() {
           <div className="space-y-6">
             <div className="space-y-2">
               <label className="text-sm font-semibold text-navy">Titre Principal</label>
-              <Input name="heroTitle" defaultValue={settings.heroTitle || ''} />
+              <Input 
+                name="heroTitle" 
+                value={heroText.title} 
+                onChange={(e) => setHeroText({ ...heroText, title: e.target.value })}
+              />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-semibold text-navy">Sous-titre / Description</label>
               <Textarea 
                 name="heroSubtitle"
                 className="h-24"
-                defaultValue={settings.heroSubtitle || ''} 
+                value={heroText.subtitle}
+                onChange={(e) => setHeroText({ ...heroText, subtitle: e.target.value })}
               />
             </div>
           </div>
+        </div>
+
+        {/* Live Preview Section */}
+        <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <h2 className="text-xl font-bold font-heading text-navy mb-6 pb-2 border-b border-gray-100 italic">
+            Prévisualisation en direct
+          </h2>
+          <div 
+            className="rounded-xl overflow-hidden border border-gray-200"
+            style={{ 
+              backgroundColor: formColors.backgroundColor,
+              color: formColors.textColor
+            }}
+          >
+            {/* Header Mockup */}
+            <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-white/50 backdrop-blur-sm">
+              <div className="h-8 w-24 bg-gray-200 rounded animate-pulse">
+                {logoPreview && <img src={logoPreview} alt="Logo" className="h-full w-full object-contain" />}
+              </div>
+              <div className="flex gap-4">
+                <div className="h-2 w-12 bg-gray-200 rounded"></div>
+                <div className="h-2 w-12 bg-gray-200 rounded"></div>
+              </div>
+            </div>
+
+            {/* Hero Mockup */}
+            <div className="p-12 text-center space-y-6">
+              <h3 
+                className="text-4xl font-bold font-heading"
+                style={{ color: formColors.primaryColor }}
+              >
+                {heroText.title || "Titre de votre Hero"}
+              </h3>
+              <p className="max-w-xl mx-auto text-lg opacity-80">
+                {heroText.subtitle || "Ceci est la description de votre entreprise qui apparaîtra sur la page d'accueil."}
+              </p>
+              <div className="pt-4 flex justify-center gap-4">
+                <div 
+                  className="px-6 py-3 rounded-lg text-white font-medium text-sm shadow-lg"
+                  style={{ backgroundColor: formColors.secondaryColor }}
+                >
+                  Découvrir nos solutions
+                </div>
+                <div 
+                  className="px-6 py-3 rounded-lg border font-medium text-sm"
+                  style={{ borderColor: formColors.secondaryColor, color: formColors.secondaryColor }}
+                >
+                  Contactez-nous
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className="text-xs text-gray-400 mt-4 text-center">
+            * Ceci est une version simplifiée pour illustrer les changements de couleurs et de texte.
+          </p>
         </div>
 
         <div className="flex justify-end gap-4">

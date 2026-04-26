@@ -14,6 +14,7 @@ interface Settings {
   secondaryColor?: string;
   backgroundColor?: string;
   textColor?: string;
+  whatsappNumber?: string;
   updatedAt: string;
 }
 

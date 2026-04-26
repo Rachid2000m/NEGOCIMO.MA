@@ -4,12 +4,12 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
 const sectors = [
-  { id: 'bureaux', name: 'Bureaux & Administratif', desc: 'Solutions acoustiques et esthétiques pour des environnements de travail productifs.', img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800', size: 'large' },
-  { id: 'hotellerie', name: 'Hôtellerie', desc: 'Confort et design premium.', img: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&q=80&w=800', size: 'small' },
-  { id: 'sante', name: 'Santé', desc: 'Hygiène totale et normes strictes.', img: 'https://images.unsplash.com/photo-1519494026892-d98c25dbce17?auto=format&fit=crop&q=80&w=800', size: 'small' },
-  { id: 'enseignement', name: 'Enseignement', desc: 'Résistance et sécurité.', img: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800', size: 'small' },
-  { id: 'commerce', name: 'Commerce & Retail', desc: 'Mettez vos espaces en valeur.', img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800', size: 'small' },
-  { id: 'transport', name: 'Transport & Industrie', desc: 'Trafic intense et durabilité extrême.', img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800', size: 'large' }
+  { id: 'bureaux', name: 'Bureaux & Administratif', desc: 'Solutions acoustiques et esthétiques pour des environnements de travail productifs.', img: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1200', size: 'large' },
+  { id: 'hotellerie', name: 'Hôtellerie', desc: 'Confort et design premium pour vos espaces d\'accueil et chambres.', img: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&q=80&w=800', size: 'small' },
+  { id: 'sante', name: 'Santé', desc: 'Hygiène totale et normes strictes pour les environnements médicaux.', img: 'https://images.unsplash.com/photo-1538108149393-fdfd816959d5?auto=format&fit=crop&q=80&w=800', size: 'small' },
+  { id: 'enseignement', name: 'Enseignement', desc: 'Résistance et sécurité pour les écoles et universités.', img: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800', size: 'small' },
+  { id: 'commerce', name: 'Commerce & Retail', desc: 'Mettez vos espaces de vente en valeur avec nos solutions design.', img: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&q=80&w=800', size: 'small' },
+  { id: 'transport', name: 'Transport & Industrie', desc: 'Trafic intense et durabilité extrême pour vos infrastructures.', img: 'https://images.unsplash.com/photo-1521330784833-ce9a10df3f90?auto=format&fit=crop&q=80&w=1200', size: 'large' }
 ];
 
 export default function SectorsSection() {
