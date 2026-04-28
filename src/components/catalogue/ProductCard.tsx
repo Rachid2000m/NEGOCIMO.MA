@@ -6,8 +6,9 @@ interface Product {
   id: string;
   name: string;
   category: string;
-  tags: string[];
+  tags?: string[];
   image: string;
+  slug?: string;
 }
 
 interface ProductCardProps {
@@ -37,7 +38,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       <div className="relative aspect-[4/3] overflow-hidden bg-section-alt">
         <img 
-          src={product.image} 
+          src={product.image || 'https://images.unsplash.com/photo-1621293954908-d81149c0dd07?auto=format&fit=crop&q=80&w=600'} 
           alt={product.name} 
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
@@ -48,19 +49,19 @@ export default function ProductCard({ product }: ProductCardProps) {
         
         {/* Sector Tags */}
         <div className="flex flex-wrap gap-1 mt-auto mb-5">
-          {product.tags.slice(0, 3).map((tag, i) => (
+          {(product.tags || []).slice(0, 3).map((tag, i) => (
             <span key={i} className="text-[10px] bg-gold/10 text-gold border border-gold/30 px-2 py-0.5 rounded-full font-bold uppercase">
               {tag}
             </span>
           ))}
-          {product.tags.length > 3 && (
+          {(product.tags || []).length > 3 && (
             <span className="text-[10px] bg-section-alt text-text-secondary border border-border px-2 py-0.5 rounded-full font-bold">
-              +{product.tags.length - 3}
+              +{(product.tags || []).length - 3}
             </span>
           )}
         </div>
         
-        <Button render={<Link to={`/catalogue/${product.id}`} />} className="w-full bg-navy hover:bg-gold text-white transition-colors duration-300">
+        <Button render={<Link to={`/catalogue/${product.slug || product.id}`} />} className="w-full bg-navy hover:bg-gold text-white transition-colors duration-300">
           Voir détails
         </Button>
       </div>

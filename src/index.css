@@ -22,6 +22,7 @@
     /* Global Colors dynamically mapped */
     --color-navy: var(--primary-custom, #1C2B4A);
     --color-navy-light: var(--primary-custom, #2E4270);
+    --color-heading: var(--heading-custom, var(--primary-custom, #1C2B4A));
     --color-gold: var(--secondary-custom, #B5902A);
     --color-gold-light: var(--secondary-custom, #D4B96A);
     --color-section-alt: var(--background-custom, #E8E4DF);
@@ -57,12 +58,12 @@
 }
 
 :root {
-    --background: #F9F7F4;
-    --foreground: #1A1A1A;
+    --background: var(--background-custom, #F9F7F4);
+    --foreground: var(--text-custom, #1A1A1A);
     --card: #FFFFFF;
-    --card-foreground: #1A1A1A;
+    --card-foreground: var(--text-custom, #1A1A1A);
     --popover: #FFFFFF;
-    --popover-foreground: #1A1A1A;
+    --popover-foreground: var(--text-custom, #1A1A1A);
     --primary: #1C2B4A;
     --primary-foreground: #FFFFFF;
     --secondary: #E8E4DF;
@@ -128,6 +129,6 @@
     scroll-behavior: smooth;
     }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading text-navy;
+    @apply font-heading text-heading;
   }
 }

@@ -17,6 +17,7 @@ import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import Configurator from './pages/Configurator';
 import { useSettingsStore } from './store/useSettingsStore';
+import { useProductsStore } from './store/useProductsStore';
 
 // Admin Pages
 import AdminLayout from './pages/admin/AdminLayout';
@@ -39,13 +40,18 @@ function MainLayout() {
 }
 
 export default function App() {
-  const init = useSettingsStore(state => state.init);
+  const initSettings = useSettingsStore(state => state.init);
+  const initProducts = useProductsStore(state => state.init);
   const settings = useSettingsStore(state => state.settings);
 
   useEffect(() => {
-    const unsubscribe = init();
-    return () => unsubscribe();
-  }, [init]);
+    const unsubSettings = initSettings();
+    const unsubProducts = initProducts();
+    return () => {
+        unsubSettings();
+        unsubProducts();
+    };
+  }, [initSettings, initProducts]);
 
   return (
     <>
@@ -56,6 +62,7 @@ export default function App() {
             ${settings?.secondaryColor ? `--secondary-custom: ${settings.secondaryColor};` : ''}
             ${settings?.backgroundColor ? `--background-custom: ${settings.backgroundColor};` : ''}
             ${settings?.textColor ? `--text-custom: ${settings.textColor};` : ''}
+            ${settings?.headingColor ? `--heading-custom: ${settings.headingColor};` : ''}
           }
         `}
       </style>

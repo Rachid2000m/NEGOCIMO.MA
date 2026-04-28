@@ -2,17 +2,28 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { useSettingsStore } from '@/store/useSettingsStore';
 
 const sectors = [
-  { id: 'bureaux', name: 'Bureaux & Administratif', desc: 'Solutions acoustiques et esthétiques pour des environnements de travail productifs.', img: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1200', size: 'large' },
-  { id: 'hotellerie', name: 'Hôtellerie', desc: 'Confort et design premium pour vos espaces d\'accueil et chambres.', img: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&q=80&w=800', size: 'small' },
-  { id: 'sante', name: 'Santé', desc: 'Hygiène totale et normes strictes pour les environnements médicaux.', img: 'https://images.unsplash.com/photo-1538108149393-fdfd816959d5?auto=format&fit=crop&q=80&w=800', size: 'small' },
-  { id: 'enseignement', name: 'Enseignement', desc: 'Résistance et sécurité pour les écoles et universités.', img: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800', size: 'small' },
-  { id: 'commerce', name: 'Commerce & Retail', desc: 'Mettez vos espaces de vente en valeur avec nos solutions design.', img: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&q=80&w=800', size: 'small' },
-  { id: 'transport', name: 'Transport & Industrie', desc: 'Trafic intense et durabilité extrême pour vos infrastructures.', img: 'https://images.unsplash.com/photo-1521330784833-ce9a10df3f90?auto=format&fit=crop&q=80&w=1200', size: 'large' }
+  { id: 'bureaux', name: 'Bureaux & Administratif', desc: 'Solutions acoustiques et esthétiques pour des environnements de travail productifs.', size: 'large' },
+  { id: 'hotellerie', name: 'Hôtellerie', desc: 'Confort et design premium pour vos espaces d\'accueil et chambres.', size: 'small' },
+  { id: 'sante', name: 'Santé', desc: 'Hygiène totale et normes strictes pour les environnements médicaux.', size: 'small' },
+  { id: 'enseignement', name: 'Enseignement', desc: 'Résistance et sécurité pour les écoles et universités.', size: 'small' },
+  { id: 'commerce', name: 'Commerce & Retail', desc: 'Mettez vos espaces de vente en valeur avec nos solutions design.', size: 'small' },
+  { id: 'transport', name: 'Transport & Industrie', desc: 'Trafic intense et durabilité extrême pour vos infrastructures.', size: 'large' }
 ];
 
 export default function SectorsSection() {
+  const { settings } = useSettingsStore();
+  const defaultImages: Record<string, string> = {
+    bureaux: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1200',
+    hotellerie: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&q=80&w=800',
+    sante: 'https://images.unsplash.com/photo-1538108149393-fdfd816959d5?auto=format&fit=crop&q=80&w=800',
+    enseignement: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800',
+    commerce: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&q=80&w=800',
+    transport: 'https://images.unsplash.com/photo-1521330784833-ce9a10df3f90?auto=format&fit=crop&q=80&w=1200'
+  };
+
   return (
     <section className="py-24 bg-section-alt">
       <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
@@ -34,7 +45,7 @@ export default function SectorsSection() {
               className={`group relative overflow-hidden rounded-2xl shadow-lg ${sector.size === 'large' ? 'md:col-span-2 lg:col-span-2 aspect-[16/9] lg:aspect-auto' : 'aspect-square md:aspect-auto'} min-h-[300px]`}
             >
               <img 
-                src={sector.img} 
+                src={settings?.sectorsImages?.[sector.id] || defaultImages[sector.id]} 
                 alt={sector.name} 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />

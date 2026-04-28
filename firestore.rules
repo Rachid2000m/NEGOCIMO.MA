@@ -19,24 +19,26 @@ service cloud.firestore {
     function isAdmin() {
       return isSignedIn() && (
         request.auth.token.email == 'rachiddmachmacha@gmail.com' ||
+        request.auth.token.email == 'admin@negocimo.com' ||
         exists(/databases/$(database)/documents/admins/$(request.auth.uid))
-      ) && request.auth.token.email_verified == true;
+      );
     }
 
     // ---- PILLAR 2: Validation Blueprints (The "Anti-Update-Gap") ----
     
     function isValidProduct(data) {
-      return data.keys().hasAll(["name", "category", "price", "stock", "status", "image", "description", "slug", "updatedAt"]) &&
-             data.name is string && data.name.size() > 0 && data.name.size() <= 200 &&
-             data.category is string && data.category.size() <= 100 &&
-             data.price is string && data.price.size() <= 100 &&
+      return data.name is string && data.name.size() > 0 &&
+             data.category is string &&
+             data.price is string &&
              data.stock is number &&
              data.status is string && data.status.matches('^(Actif|Inactif|Rupture)$') &&
-             data.image is string && data.image.size() <= 1000 &&
-             data.description is string && data.description.size() <= 10000 &&
-             data.slug is string && data.slug.size() <= 200 &&
-             (!data.keys().hasAny(["tags"]) || (data.tags is list && data.tags.size() <= 20)) &&
-             (!data.keys().hasAny(["features"]) || (data.features is list && data.features.size() <= 50));
+             data.image is string && data.image.size() <= 6000000 &&
+             (!data.keys().hasAny(["description"]) || data.description is string) &&
+             (!data.keys().hasAny(["slug"]) || data.slug is string) &&
+             (!data.keys().hasAny(["updatedAt"]) || data.updatedAt is string) &&
+             (!data.keys().hasAny(["id"]) || data.id is string) &&
+             (!data.keys().hasAny(["tags"]) || data.tags is list) &&
+             (!data.keys().hasAny(["features"]) || data.features is list);
     }
 
     function isValidSector(data) {
@@ -72,7 +74,17 @@ service cloud.firestore {
              (!data.keys().hasAny(["secondaryColor"]) || (data.secondaryColor is string && data.secondaryColor.size() <= 30)) &&
              (!data.keys().hasAny(["backgroundColor"]) || (data.backgroundColor is string && data.backgroundColor.size() <= 30)) &&
              (!data.keys().hasAny(["whatsappNumber"]) || (data.whatsappNumber is string && data.whatsappNumber.size() <= 30)) &&
-             (!data.keys().hasAny(["textColor"]) || (data.textColor is string && data.textColor.size() <= 30));
+             (!data.keys().hasAny(["textColor"]) || (data.textColor is string && data.textColor.size() <= 30)) &&
+             (!data.keys().hasAny(["headingColor"]) || (data.headingColor is string && data.headingColor.size() <= 30)) &&
+             (!data.keys().hasAny(["heroImage"]) || (data.heroImage is string && data.heroImage.size() <= 1000000)) &&
+             (!data.keys().hasAny(["aboutTitle"]) || (data.aboutTitle is string && data.aboutTitle.size() <= 200)) &&
+             (!data.keys().hasAny(["aboutText"]) || (data.aboutText is string && data.aboutText.size() <= 10000)) &&
+             (!data.keys().hasAny(["aboutImage"]) || (data.aboutImage is string && data.aboutImage.size() <= 1000000)) &&
+             (!data.keys().hasAny(["ctaTitle"]) || (data.ctaTitle is string && data.ctaTitle.size() <= 200)) &&
+             (!data.keys().hasAny(["ctaText"]) || (data.ctaText is string && data.ctaText.size() <= 2000)) &&
+             (!data.keys().hasAny(["showStats"]) || data.showStats is bool) &&
+             (!data.keys().hasAny(["showTestimonials"]) || data.showTestimonials is bool) &&
+             (!data.keys().hasAny(["showClients"]) || data.showClients is bool);
     }
 
     function isValidMessage(data) {
@@ -95,8 +107,8 @@ service cloud.firestore {
 
     match /products/{productId} {
       allow read: if true; // Public catalog
-      allow create: if isAdmin() && isValidId(productId) && isValidProduct(incoming()) && incoming().updatedAt == request.time;
-      allow update: if isAdmin() && isValidId(productId) && isValidProduct(incoming()) && incoming().updatedAt == request.time;
+      allow create: if isAdmin() && isValidId(productId) && isValidProduct(incoming());
+      allow update: if isAdmin() && isValidId(productId) && isValidProduct(incoming());
       allow delete: if isAdmin();
     }
 

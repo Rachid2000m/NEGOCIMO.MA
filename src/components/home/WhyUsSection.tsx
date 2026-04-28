@@ -2,8 +2,11 @@ import { CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { useSettingsStore } from '@/store/useSettingsStore';
 
 export default function WhyUsSection() {
+  const { settings } = useSettingsStore();
+  const defaultImage = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000";
   const points = [
     "Expertise terrain & conseil personnalisé à chaque étape",
     "Matériaux certifiés de qualité supérieure (normes ISO/CE)",
@@ -53,7 +56,7 @@ export default function WhyUsSection() {
             <div className="absolute -inset-4 bg-gold/10 rounded-3xl transform rotate-3 scale-105 -z-10" />
             
             <img 
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000" 
+              src={settings?.whyUsImage || defaultImage} 
               alt="Équipe NEGOCIMO sur le terrain" 
               className="rounded-3xl shadow-2xl object-cover aspect-[4/3] w-full"
             />

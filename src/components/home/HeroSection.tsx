@@ -11,7 +11,7 @@ export default function HeroSection() {
       {/* Background image fallback (could be video) */}
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop")' }}
+        style={{ backgroundImage: `url("${settings?.heroImage || 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop'}")` }}
       />
       
       {/* Overlay gradient for readability */}

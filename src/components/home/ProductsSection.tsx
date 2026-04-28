@@ -2,27 +2,25 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { useProductsStore } from '@/store/useProductsStore';
 
-// Mock data since we don't have the real Supabase setup active
-const categories = ["Tous", "Moquette", "PVC", "Faux Plafonds"];
-
-const mockProducts = [
-  { id: 1, name: "Moquette Dalle Interface", category: "Moquette", image: "https://images.unsplash.com/photo-1621293954908-d81149c0dd07?auto=format&fit=crop&q=80&w=600" },
-  { id: 2, name: "Revêtement PVC Tarkett", category: "PVC", image: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?auto=format&fit=crop&q=80&w=600" },
-  { id: 3, name: "Plafond Acoustique Rockfon", category: "Faux Plafonds", image: "https://images.unsplash.com/photo-1541123437800-1c0c053f5b72?auto=format&fit=crop&q=80&w=600" },
-  { id: 4, name: "Dalle Moquette Desso", category: "Moquette", image: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&q=80&w=600" },
-  { id: 5, name: "Sol LVT Click", category: "PVC", image: "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?auto=format&fit=crop&q=80&w=600" },
-  { id: 6, name: "Wood Lines Plafon", category: "Faux Plafonds", image: "https://images.unsplash.com/photo-1449156001499-47399479fb48?auto=format&fit=crop&q=80&w=600" },
-  { id: 7, name: "Broadloom Carpet", category: "Moquette", image: "https://images.unsplash.com/photo-1533630801152-2da60bb3bc74?auto=format&fit=crop&q=80&w=600" },
-  { id: 8, name: "Gerflor Mipolam", category: "PVC", image: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6ad?auto=format&fit=crop&q=80&w=600" }
-];
+// Fallback categories if store is empty
+const defaultCategories = ["Tous", "Moquette", "PVC", "Faux Plafonds"];
 
 export default function ProductsSection() {
   const [activeTab, setActiveTab] = useState("Tous");
+  const { products } = useProductsStore();
+
+  // If we have products, extract unique categories
+  const dynamicCategories = products.length > 0 
+    ? ["Tous", ...Array.from(new Set(products.map(p => p.category)))]
+    : defaultCategories;
+
+  const categoriesToUse = products.length > 0 ? dynamicCategories : defaultCategories;
 
   const filteredProducts = activeTab === "Tous" 
-    ? mockProducts 
-    : mockProducts.filter(p => p.category === activeTab);
+    ? products 
+    : products.filter(p => p.category === activeTab);
 
   return (
     <section className="py-24 bg-white">
@@ -34,7 +32,7 @@ export default function ProductsSection() {
           </p>
           
           <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {categories.map(cat => (
+            {categoriesToUse.map(cat => (
               <button
                 key={cat}
                 onClick={() => setActiveTab(cat)}
@@ -66,7 +64,7 @@ export default function ProductsSection() {
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-section-alt">
                 <img 
-                  src={product.image} 
+                  src={product.image || 'https://images.unsplash.com/photo-1621293954908-d81149c0dd07?auto=format&fit=crop&q=80&w=600'} 
                   alt={product.name} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
